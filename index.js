@@ -1,7 +1,16 @@
-const { Command } = require("commander");
+import {
+  listContacts,
+  getContactById,
+  addContact,
+  removeContact,
+} from "./contacts.js";
+
+import { Command } from "commander";
+
 const program = new Command();
+
 program
-  .option("-a, --action <type>", "choose action")
+  .option("-a, --action <type>", "choose action (list, get, add, remove)")
   .option("-i, --id <type>", "user id")
   .option("-n, --name <type>", "user name")
   .option("-e, --email <type>", "user email")
@@ -11,23 +20,22 @@ program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: refaktor
 function invokeAction({ action, id, name, email, phone }) {
   switch (action) {
     case "list":
-      // ...
+      listContacts();
       break;
 
     case "get":
-      // ... id
+      getContactById(id);
       break;
 
     case "add":
-      // ... name email phone
+      addContact(name, email, phone);
       break;
 
     case "remove":
-      // ... id
+      removeContact(id);
       break;
 
     default:

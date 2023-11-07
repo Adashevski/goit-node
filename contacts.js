@@ -1,9 +1,12 @@
-const path = require("path");
-const fs = require("fs").promises;
-const nanoid = require("nanoid");
+import path from "path";
+import { promises as fs } from "fs";
+import { nanoid } from "nanoid";
 
-const contactsPath = path.join(__dirname, "db", "contacts.json");
-
+//const contactsPath = path.join(__dirname, "db", "contacts.json");
+//const contactsPath = new URL("db/contacts.json", import.meta.url).pathname;
+const contactsPath = new URL(
+  "file:/Users/User/Desktop/IT/goit-node/db/contacts.json"
+).pathname;
 async function readDataFromFile() {
   try {
     const data = await fs.readFile(contactsPath, "utf-8");
@@ -22,12 +25,12 @@ async function writeDataToFile(data) {
   }
 }
 
-async function listContacts() {
+export async function listContacts() {
   const contacts = await readDataFromFile();
   console.table(contacts);
 }
 
-async function getContactById(contactId) {
+export async function getContactById(contactId) {
   const contacts = await readDataFromFile();
   const contact = contacts.find((contact) => contact.id === contactId);
   if (!contact) {
@@ -37,7 +40,7 @@ async function getContactById(contactId) {
   }
 }
 //
-async function removeContact(contactId) {
+export async function removeContact(contactId) {
   const contacts = await readDataFromFile();
   const newContacts = contacts.filter((contact) => contact.id !== contactId);
 
@@ -49,7 +52,7 @@ async function removeContact(contactId) {
   }
 }
 
-async function addContact(name, email, phone) {
+export async function addContact(name, email, phone) {
   const contacts = await readDataFromFile();
 
   if (
