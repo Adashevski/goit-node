@@ -1,10 +1,7 @@
-import {
-  listContacts,
-  getContactById,
-  addContact,
-  removeContact,
-} from "./contacts.js";
-
+import { listContacts } from "./controllers/contacts/listContacts.js";
+import { getContactById } from "./controllers/contacts/getContactsById.js";
+import { addContact } from "./controllers/contacts/addContacts.js";
+import { removeContact } from "./controllers/contacts/removeContacts.js";
 import { Command } from "commander";
 
 const program = new Command();
