@@ -14,9 +14,7 @@ export async function addContact(name, email, phone) {
 
   for (let property of propertiesToCheck) {
     if (findByKeyValue(contacts, property.name, property.value)) {
-      console.log(
-        `Contact with name: ${property.name} is already in the database.`
-      );
+      console.log(`Contact with name: ${name} is already in the database.`);
       return;
     }
   }
